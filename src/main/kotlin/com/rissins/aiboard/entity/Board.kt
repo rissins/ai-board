@@ -32,4 +32,6 @@ class Board(
     var deleted: Boolean = false
 
     lateinit var deletedAt: OffsetDateTime
+
+    fun plusView() = this.view++
 }

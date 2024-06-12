@@ -22,9 +22,11 @@ class BoardService(
         return boardRepository.findAll()
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     fun findById(id: Long): BoardResponse.Detail {
-        return boardRepository.findById(id).orElseThrow().toDetail()
+        var board = boardRepository.findById(id).orElseThrow()
+        board.plusView()
+        return board.toDetail()
     }
 
     @Transactional(readOnly = true)
