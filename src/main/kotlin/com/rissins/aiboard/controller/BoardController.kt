@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RestController
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/board")
 class BoardController(
     private val boardService: BoardService
@@ -28,6 +29,14 @@ class BoardController(
         @ParameterObject pageable: Pageable,
     ): PageResponse<BoardResponse.Detail> {
         return boardService.search(boardRequest, pageable).toPageResponse()
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "게시글 상세보기.")
+    fun find(
+        @PathVariable id: Long,
+    ): BoardResponse.Detail {
+        return boardService.findById(id)
     }
 
     @PostMapping

@@ -23,6 +23,11 @@ class BoardService(
     }
 
     @Transactional(readOnly = true)
+    fun findById(id: Long): BoardResponse.Detail {
+        return boardRepository.findById(id).orElseThrow().toDetail()
+    }
+
+    @Transactional(readOnly = true)
     fun search(boardRequest: BoardRequest.Search, pageable: Pageable): Page<BoardResponse.Detail> {
         val condition = BoardRequest.Search(
             title = boardRequest.title,

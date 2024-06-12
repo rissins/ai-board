@@ -3,12 +3,16 @@ package com.rissins.aiboard.entity
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
+import org.hibernate.annotations.DynamicUpdate
+import org.hibernate.annotations.SQLDelete
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.OffsetDateTime
 
 @Entity
 @Table
 @EntityListeners(AuditingEntityListener::class)
+@DynamicUpdate
+@SQLDelete(sql = "UPDATE board SET deleted = true, deleted_at = sysdate() WHERE id = ?")
 class Board(
     val title: String,
     val content: String,
@@ -26,4 +30,6 @@ class Board(
     lateinit var updatedAt: OffsetDateTime
 
     var deleted: Boolean = false
+
+    lateinit var deletedAt: OffsetDateTime
 }
