@@ -30,4 +30,18 @@ class BoardService(
 
         return boardQueryRepository.search(condition, pageable).map { it.toDetail() }
     }
+
+    @Transactional
+    fun create(request: BoardRequest.Create): BoardResponse.Detail {
+        val board = Board(
+            title = request.title,
+            content = request.content,
+        )
+        return boardRepository.save(board).toDetail()
+    }
+
+    @Transactional
+    fun deleteById(id: Long) {
+        boardRepository.deleteById(id)
+    }
 }

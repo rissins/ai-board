@@ -11,6 +11,9 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PathVariable
 
 @Controller
 @RequestMapping("/api/v1/board")
@@ -24,8 +27,22 @@ class BoardController(
         @ParameterObject boardRequest: BoardRequest.Search,
         @ParameterObject pageable: Pageable,
     ): PageResponse<BoardResponse.Detail> {
-        val search = boardService.search(boardRequest, pageable)
-        val toPageResponse = boardService.search(boardRequest, pageable).toPageResponse()
-        return toPageResponse
+        return boardService.search(boardRequest, pageable).toPageResponse()
+    }
+
+    @PostMapping
+    @Operation(summary = "게시판 글을 작성한다.")
+    fun create(
+        @ParameterObject boardRequest: BoardRequest.Create,
+    ): BoardResponse.Detail {
+        return boardService.create(boardRequest)
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "게시판 글을 삭제한다.")
+    fun deleteById(
+        @PathVariable id:Long 
+    ) {
+        boardService.deleteById(id)
     }
 }

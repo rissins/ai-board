@@ -12,11 +12,12 @@ import java.time.OffsetDateTime
 class Board(
     val title: String,
     val content: String,
-    val view: Int,
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
+
+    var view: Int = 0
 
     @CreationTimestamp
     lateinit var createdAt: OffsetDateTime
