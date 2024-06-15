@@ -1,4 +1,4 @@
-package com.rissins.aiboard.repository
+package com.rissins.aiboard.jpa.repository
 
 import com.rissins.aiboard.dto.request.PostRequest
 import com.rissins.aiboard.entity.Post

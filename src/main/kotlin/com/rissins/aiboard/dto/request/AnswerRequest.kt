@@ -7,6 +7,7 @@ class AnswerRequest {
     )
 
     data class Create(
+        val postId: Long,
         val title: String,
         val content: String,
     )

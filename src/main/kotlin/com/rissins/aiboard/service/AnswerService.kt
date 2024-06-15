@@ -7,13 +7,17 @@ import com.rissins.aiboard.dto.response.PostResponse
 import com.rissins.aiboard.dto.response.toDetail
 import com.rissins.aiboard.entity.Answer
 import com.rissins.aiboard.entity.Post
-import com.rissins.aiboard.repository.AnswerRepository
+import com.rissins.aiboard.jpa.findByIdOrThrow
+import com.rissins.aiboard.jpa.repository.AnswerRepository
+import com.rissins.aiboard.jpa.repository.PostRepository
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class AnswerService(
     private val answerRepository: AnswerRepository,
+    private val postRepository: PostRepository
 ) {
 
     @Transactional
@@ -29,10 +33,13 @@ class AnswerService(
 
     @Transactional
     fun create(request: AnswerRequest.Create): AnswerResponse.Detail {
+        val post = postRepository.findByIdOrThrow(request.postId)
         val answer = Answer(
             title = request.title,
             content = request.content,
+            post = post
         )
+
         return answerRepository.save(answer).toDetail()
     }
 

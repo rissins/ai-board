@@ -1,4 +1,4 @@
-package com.rissins.aiboard.repository
+package com.rissins.aiboard.jpa.repository
 
 import com.querydsl.core.types.Predicate
 import com.querydsl.jpa.impl.JPAQueryFactory

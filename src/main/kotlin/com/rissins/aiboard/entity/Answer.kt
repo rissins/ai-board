@@ -16,6 +16,9 @@ import java.time.OffsetDateTime
 class Answer(
     val title: String,
     val content: String,
+    @OneToOne
+    @JoinColumn(name = "post_id")
+    var post: Post,
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

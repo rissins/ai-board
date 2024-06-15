@@ -4,8 +4,8 @@ import com.rissins.aiboard.dto.request.PostRequest
 import com.rissins.aiboard.dto.response.PostResponse
 import com.rissins.aiboard.dto.response.toDetail
 import com.rissins.aiboard.entity.Post
-import com.rissins.aiboard.repository.PostQueryRepository
-import com.rissins.aiboard.repository.PostRepository
+import com.rissins.aiboard.jpa.repository.PostQueryRepository
+import com.rissins.aiboard.jpa.repository.PostRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
