@@ -34,4 +34,8 @@ class Post(
     lateinit var deletedAt: OffsetDateTime
 
     fun plusView() = this.view++
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "answer_id")
+    var answer: Answer? = null
 }
