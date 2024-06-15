@@ -12,8 +12,8 @@ import java.time.OffsetDateTime
 @Table
 @EntityListeners(AuditingEntityListener::class)
 @DynamicUpdate
-@SQLDelete(sql = "UPDATE board SET deleted = true, deleted_at = sysdate() WHERE id = ?")
-class Board(
+@SQLDelete(sql = "UPDATE post SET deleted = true, deleted_at = sysdate() WHERE id = ?")
+class Post(
     val title: String,
     val content: String,
 ) {

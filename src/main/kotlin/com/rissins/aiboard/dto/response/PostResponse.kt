@@ -1,8 +1,8 @@
 package com.rissins.aiboard.dto.response
 
-import com.rissins.aiboard.entity.Board
+import com.rissins.aiboard.entity.Post
 
-class BoardResponse {
+class PostResponse {
 
     data class Detail(
         var title: String,
@@ -11,8 +11,8 @@ class BoardResponse {
     )
 }
 
-fun Board.toDetail(): BoardResponse.Detail {
-    return BoardResponse.Detail(
+fun Post.toDetail(): PostResponse.Detail {
+    return PostResponse.Detail(
         title = this.title,
         content = this.content,
         view = this.view,

@@ -2,40 +2,40 @@ package com.rissins.aiboard.repository
 
 import com.querydsl.core.types.Predicate
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.rissins.aiboard.dto.request.BoardRequest
-import com.rissins.aiboard.entity.Board
-import com.rissins.aiboard.entity.QBoard.board
+import com.rissins.aiboard.dto.request.PostRequest
+import com.rissins.aiboard.entity.Post
+import com.rissins.aiboard.entity.QPost.post
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.support.PageableExecutionUtils
 import org.springframework.stereotype.Repository
 
 @Repository
-class BoardQueryRepositoryImpl(private val jpaQueryFactory: JPAQueryFactory) : BoardQueryRepository {
-    private fun getPredicates(condition: BoardRequest.Search): List<Predicate> {
+class PostQueryRepositoryImpl(private val jpaQueryFactory: JPAQueryFactory) : PostQueryRepository {
+    private fun getPredicates(condition: PostRequest.Search): List<Predicate> {
         return listOfNotNull(
-            condition.title?.let { board.title.eq(it) },
+            condition.title?.let { post.title.eq(it) },
         )
     }
 
-    override fun search(condition: BoardRequest.Search, pageable: Pageable): Page<Board> {
+    override fun search(condition: PostRequest.Search, pageable: Pageable): Page<Post> {
         val content = jpaQueryFactory
-            .selectFrom(board)
+            .selectFrom(post)
             .where(
                 *getPredicates(condition).toTypedArray(),
             )
-            .orderBy(board.id.desc())
+            .orderBy(post.id.desc())
             .offset(pageable.offset)
             .limit(pageable.pageSize.toLong())
             .fetch()
 
         val countQuery = jpaQueryFactory
-            .select(board.count())
-            .from(board)
+            .select(post.count())
+            .from(post)
             .where(
                 *getPredicates(condition).toTypedArray(),
             )
 
-        return PageableExecutionUtils.getPage(content, pageable, content::)
+        return PageableExecutionUtils.getPage(content, pageable) { countQuery.fetchOne() ?: 0L }
     }
 }

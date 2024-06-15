@@ -1,6 +1,6 @@
 package com.rissins.aiboard.dto.request
 
-class BoardRequest {
+class PostRequest {
 
     data class Search(
         val title: String? = null,
