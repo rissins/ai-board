@@ -38,6 +38,9 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
+	// WebClient 의존성 추가
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+
 }
 
 tasks.withType<KotlinCompile> {

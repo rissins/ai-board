@@ -35,7 +35,7 @@ class Post(
 
     fun plusView() = this.view++
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "post")
     @JoinColumn(name = "answer_id")
     var answer: Answer? = null
 }

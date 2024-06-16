@@ -8,6 +8,7 @@ class PostResponse {
         var title: String,
         val content: String,
         val view: Int,
+        val answer: AnswerResponse.Detail?
     )
 }
 
@@ -16,5 +17,6 @@ fun Post.toDetail(): PostResponse.Detail {
         title = this.title,
         content = this.content,
         view = this.view,
+        answer =  this.answer?.toDetail()
     )
 }

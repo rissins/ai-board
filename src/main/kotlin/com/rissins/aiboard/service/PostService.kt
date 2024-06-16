@@ -25,7 +25,7 @@ class PostService(
     @Transactional
     fun findById(id: Long): PostResponse.Detail {
         val post = postRepository.findById(id).orElseThrow()
-        post.plusView()
+//        post.plusView()
         return post.toDetail()
     }
 

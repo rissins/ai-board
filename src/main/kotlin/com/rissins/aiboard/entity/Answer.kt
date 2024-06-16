@@ -18,7 +18,7 @@ class Answer(
     val content: String,
     @OneToOne
     @JoinColumn(name = "post_id")
-    var post: Post,
+    val post: Post,
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
