@@ -213,4 +213,13 @@ gradle-app.setting
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+.bin/*
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij+all,windows,macos,gradle,git
